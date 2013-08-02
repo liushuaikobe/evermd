@@ -1,0 +1,75 @@
+enml_legal_tag = [ \
+			'a',\
+			'abbr', \
+			'acronym', \
+			'address', \
+			'area', \
+			'b,', \
+			'bdo', \
+			'big', \
+			'blockquote', \
+			'br', \
+			'caption', \
+			'center', \
+			'cite', \
+			'code', \
+			'col', \
+			'colgroup', \
+			'dd', \
+			'del', \
+			'dfn', \
+			'div', \
+			'dl', \
+			'dt', \
+			'em', \
+			'font', \
+			'h1', \
+			'h2', \
+			'h3', \
+			'h4', \
+			'h5', \
+			'h6', \
+			'hr', \
+			'i', \
+			'img', \
+			'ins', \
+			'kbd', \
+			'li', \
+			'map', \
+			'ol', \
+			'p', \
+			'pre', \
+			'q', \
+			's', \
+			'samp', \
+			'small', \
+			'span', \
+			'strike', \
+			'strong', \
+			'sub', \
+			'sup', \
+			'table', \
+			'tbody', \
+			'td', \
+			'tfoot', \
+			'th', \
+			'thead', \
+			'title', \
+			'tr', \
+			'tt', \
+			'u', \
+			'ul', \
+			'var', \
+			'xmp'
+			]
+
+enml_ilegal_attr = [ \
+			'id', \
+			'class', \
+			'onclick', \
+			'ondblclick', \
+			'accesskey', \
+			'data', \
+			'dynsrc', \
+			'tabindex'
+			]
