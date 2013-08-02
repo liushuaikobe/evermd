@@ -9,19 +9,15 @@ def md2html(md):
 	return markdown.markdown(md).encode("utf-8")
 
 def html2enml(html):
-	try:
-		enmlParser = EnmlParser(config.enml_legal_tag, config.enml_ilegal_attr)
-		enmlParser.feed(html)
-		print enmlParser.get_clean_text()
-		return enmlParser.get_clean_text()
-	except Exception, e:
-		print 'html must be utf-8.'
-		raise e
+	enmlParser = EnmlParser(config.enml_legal_tag, config.enml_ilegal_attr)
+	enmlParser.feed(html)
+	# print enmlParser.get_clean_text()
+	return enmlParser.get_clean_text()
 
 
 class EnmlParser(HTMLParser.HTMLParser):
 	'''
-	replace some html tags with enml tages
+	ENML tags & attributes filter.
 	'''
 	def __init__(self, legal_tag, ilegal_attr):
 		HTMLParser.HTMLParser.__init__(self)
@@ -57,12 +53,24 @@ class EnmlParser(HTMLParser.HTMLParser):
 		return self.wrapENML(''.join(self.clean_text))
 
 	def handle_media(self):
+		'''
+		Do something specially for the media resource(tag and attributes) in html.
+		But actually I found that these tags without any extra handling works perfectly in evernote!
+		notice -> there are 3 protocols that enml supporting : http, https, file
+		'''
 		pass
 
 	def wrapENML(self, clean_text):
 		header = '<?xml version="1.0" encoding="UTF-8"?>\n'
 		header += '<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">\n'
 		return '%s\n<en-note>%s</en-note>' % (header, clean_text)
+
+def get_default_notetitle(path):
+	'''
+	Suppose we are in *nix OS.:)
+	'''
+	separator = '/'
+	return path.split(separator)[-1].split('.')[0]
 
 
 

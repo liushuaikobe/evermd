@@ -1,3 +1,7 @@
+auth_token = 'S=s1:U=72a0c:E=14790c4cc95:C=1403913a098:P=1cd:A=en-devtoken:V=2:H=62d96bedf9a1adbb47b43c67b1474b95'
+
+sandbox = True
+
 enml_legal_tag = [ \
 			'a',\
 			'abbr', \
