@@ -2,6 +2,19 @@ auth_token = 'S=s1:U=72a0c:E=14790c4cc95:C=1403913a098:P=1cd:A=en-devtoken:V=2:H
 
 sandbox = True
 
+consumer_key = 'liushuaikobe'
+consumer_secret = 'be4517542c7860ca'
+
+if sandbox:
+	evernote_host = 'sandbox.evernote.com'
+else:
+	evernote_host = 'app.yinxiang.com'
+
+# URL for Oauth
+request_token_url = 'https://%s/oauth' % evernote_host
+authorize_url = 'https://%s/OAuth.action' % evernote_host
+access_token_url = 'https://%s/oauth' % evernote_host
+
 enml_legal_tag = [ \
 			'a',\
 			'abbr', \
