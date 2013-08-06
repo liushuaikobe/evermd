@@ -1,5 +1,7 @@
+import sys
 import markdown
 import HTMLParser
+
 import config
 
 def read_markdown_from_file(path):
@@ -72,6 +74,10 @@ def get_default_notetitle(path):
 	separator = '/'
 	return path.split(separator)[-1].split('.')[0]
 
+def import_evernote_lib():
+	lib_path = './lib'
+	if lib_path not in sys.path:
+		sys.path.append(lib_path)
 
 
 

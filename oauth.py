@@ -1,8 +1,12 @@
 import urlparse
 import webbrowser
+import oauth2 as oauth
 
 import config
-import oauth2 as oauth
+import utils
+utils.import_evernote_lib()
+
+from evernote.api.client import EvernoteClient
 
 class EvernoteAuth(object):
 	def __init__(self):
@@ -21,7 +25,7 @@ class EvernoteAuth(object):
 			)
 
 	def auth(self):
-		resp, content = self.client.request(config.request_token_url, "GET")
+		resp, content = self.client().request(config.request_token_url, "GET")
 
 		print resp,content
 

@@ -1,8 +1,8 @@
 import sys
-sys.path.append('./lib')
 
-import utils
 import config
+import utils
+utils.import_evernote_lib()
 
 from evernote.api.client import EvernoteClient
 import evernote.edam.type.ttypes as Types
