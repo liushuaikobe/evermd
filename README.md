@@ -50,7 +50,6 @@ $ python create.py ~/temp/test1.md
 ```
 The entire process may be:
 ![sample_use](./img/sample_use.png)
-
 4. Enjoy evermd ! 
 ![note](./img/note.png)
 
@@ -60,7 +59,7 @@ Some known defects:
 
 - we can just create a note but we can't modify it or even sync it
 - markdown -> html -> [ENML](http://dev.evernote.com/start/core/enml.php), in which `html -> ENML` process need to be improved
-- The way we get the default note name need to be handled more robust
+- the way we get the default note name need to be handled more robust
 
 ## Thanks to
 - [geeknote](https://github.com/VitaliyRodnenko/geeknote)
