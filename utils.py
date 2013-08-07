@@ -1,5 +1,7 @@
+import sys
 import markdown
 import HTMLParser
+
 import config
 
 def read_markdown_from_file(path):
@@ -55,7 +57,7 @@ class EnmlParser(HTMLParser.HTMLParser):
 	def handle_media(self):
 		'''
 		Do something specially for the media resource(tag and attributes) in html.
-		But actually I found that these tags without any extra handling works perfectly in evernote!
+		But actually I found that these tags without any extra handling work perfectly in evernote!
 		notice -> there are 3 protocols that enml supporting : http, https, file
 		'''
 		pass
@@ -65,12 +67,38 @@ class EnmlParser(HTMLParser.HTMLParser):
 		header += '<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">\n'
 		return '%s\n<en-note>%s</en-note>' % (header, clean_text)
 
+class Struct:
+	def __init__(self, **entries): 
+		self.__dict__.update(entries)
+
 def get_default_notetitle(path):
 	'''
 	Suppose we are in *nix OS.:)
 	'''
 	separator = '/'
 	return path.split(separator)[-1].split('.')[0]
+
+def get_user_credentials():
+	'''
+	Prompts the user for a username and password.
+	'''
+	try:
+		login = None
+		password = None
+		if login is None:
+			login = raw_input("Evernote Login: ")
+
+		if password is None:
+			password = raw_input("Evernote Password: ")
+	except (KeyboardInterrupt, SystemExit):
+		sys.exit()
+
+	return login, password
+
+def import_evernote_lib():
+	lib_path = './lib'
+	if lib_path not in sys.path:
+		sys.path.append(lib_path)
 
 
 
