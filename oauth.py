@@ -170,10 +170,8 @@ class GeekNoteAuth(object):
 		self.postData['login']['username'] = self.username
 		self.postData['login']['password'] = self.password
 		self.postData['login']['targetUrl'] = self.url['oauth'] % self.tmpOAuthToken
-		response = self.loadPage(self.url['base'], self.url['login'] + ";jsessionid = " + self.cookies['JSESSIONID'], "POST", 
+		response = self.loadPage(self.url['base'], self.url['login'] + ";jsessionid=" + self.cookies['JSESSIONID'], "POST", 
 			self.postData['login'])
-
-		print response
 
 		if not response.location and response.status == 200: # response.status should be 302
 			if self.incorrectLogin < 3:
