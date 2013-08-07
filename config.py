@@ -10,11 +10,6 @@ if sandbox:
 else:
 	evernote_host = 'app.yinxiang.com'
 
-# URL for Oauth
-request_token_url = 'https://%s/oauth' % evernote_host
-authorize_url = 'https://%s/OAuth.action' % evernote_host
-access_token_url = 'https://%s/oauth' % evernote_host
-
 enml_legal_tag = [ \
 			'a',\
 			'abbr', \

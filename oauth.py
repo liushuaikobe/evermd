@@ -1,4 +1,4 @@
-import os, sys
+import sys
 
 import utils
 utils.import_evernote_lib()
@@ -13,13 +13,13 @@ from urlparse import urlparse
 
 import config
 
-class GeekNoteAuth(object):
+class EvermdAuth(object):
 
 	consumerKey = config.consumer_key
 	consumerSecret = config.consumer_secret
 
 	url = {
-		"base"  : 'sandbox.evernote.com',
+		"base"  : config.evernote_host,
 		"oauth" : "/OAuth.action?oauth_token=%s",
 		"access": "/OAuth.action",
 		"token" : "/oauth",
@@ -48,6 +48,7 @@ class GeekNoteAuth(object):
 	tmpOAuthToken = None
 	verifierToken = None
 	OAuthToken = None
+	edamNoteStoreUrl = None
 	incorrectLogin = 0
 
 	def getTokenRequestData(self, **kwargs):
@@ -107,7 +108,7 @@ class GeekNoteAuth(object):
 		# print 'response status: ', response.status
 		# print 'response headers: ', response.getheaders()
 
-		result = Struct(status=response.status, location=response.getheader('location', None), data=data)
+		result = utils.Struct(status=response.status, location=response.getheader('location', None), data=data)
 
 		# update local cookies
 		sk = Cookie.SimpleCookie(response.getheader("Set-Cookie", ""))
@@ -120,20 +121,24 @@ class GeekNoteAuth(object):
 		data = unquote(data)
 		return dict(item.split('=', 1) for item in data.split('?')[-1].split('&'))
 
-
-	def getToken(self):
+	def auth(self):
 		print 'Authorize...'
 		self.getTmpOAuthToken()
-
 		self.login()
-
 		print 'Allow Access...'
 		self.allowAccess()
-
 		print 'Getting Token...'
 		self.getOAuthToken()
 
+	def getToken(self):
+		if not self.OAuthToken:
+			self.auth()
 		return self.OAuthToken
+
+	def getNoteStoreUrl(self):
+		if not self.edamNoteStoreUrl:
+			self.auth()
+		return self.edamNoteStoreUrl
 
 
 	def getTmpOAuthToken(self):
@@ -151,7 +156,8 @@ class GeekNoteAuth(object):
 
 		self.tmpOAuthToken = responseData['oauth_token']
 
-		print "Temporary OAuth token : ", self.tmpOAuthToken
+		print 'Temporary OAuth token take'
+		# print 'Temporary OAuth token : ', self.tmpOAuthToken
 
 	def login(self):
 		response = self.loadPage(self.url['base'], self.url['login'], "GET", {'oauth_token': self.tmpOAuthToken})
@@ -165,7 +171,7 @@ class GeekNoteAuth(object):
 			sys.exit()
 
 		# get login/password
-		self.username, self.password = GetUserCredentials()
+		self.username, self.password = utils.get_user_credentials()
 
 		self.postData['login']['username'] = self.username
 		self.postData['login']['password'] = self.password
@@ -215,34 +221,27 @@ class GeekNoteAuth(object):
 			sys.exit()
 
 		responseData = self.parseResponse(response.data)
+
 		if not responseData.has_key('oauth_token'):
 			print "ERROR: OAuth token not found"
 			sys.exit()
 
-		print "OAuth token take: ", responseData['oauth_token']
+		if not responseData.has_key('edam_noteStoreUrl'):
+			print "ERROR: NoteStoreUrl not found"
+			sys.exit()
+
 		self.OAuthToken = responseData['oauth_token']
+		print 'OAuth token take'
+		# print "OAuth token take: ", responseData['oauth_token']
 
-def GetUserCredentials():
-	'''
-	Prompts the user for a username and password.
-	'''
-	try:
-		login = None
-		password = None
-		if login is None:
-			login = raw_input("Evernote Login: ")
-
-		if password is None:
-			password = raw_input("Evernote Password: ")
-	except (KeyboardInterrupt, SystemExit):
-		sys.exit()
-
-	return (login, password)
-
-class Struct:
-	def __init__(self, **entries): 
-		self.__dict__.update(entries)
+		self.edamNoteStoreUrl = responseData['edam_noteStoreUrl']
+		print 'NoteStoreUrl take'
+		# print 'edam_noteStoreUrl: ', responseData['edam_noteStoreUrl']
 
 if __name__ == '__main__':
-	tmp = GeekNoteAuth()
+	'''
+	just for unit test
+	'''
+	tmp = EvermdAuth()
 	print tmp.getToken()
+	print tmp.getNoteStoreUrl()
