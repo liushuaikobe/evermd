@@ -2,13 +2,13 @@ evermd
 ======
 ## What is evermd ?
 evermd is a command line tool implemented with Python 2.X that provides a simple markdown support to [Evernote](http://www.evernote.com/).        
-Because of its using the lib [Markdown](https://pypi.python.org/pypi/Markdown) of Python, there are something that evermd **doesn't** support:
+Because of its using the [Markdown](https://pypi.python.org/pypi/Markdown) lib of Python, there are something that evermd **doesn't** support:
 
 - LaTeX expression
 - code blocks specified language
 - Table
 
-What evermd supports is as follows:
+Some evermd supports is as follows:
 
 - title from h1 to h6
 - italic and bold
@@ -52,6 +52,7 @@ $ python create.py ~/temp/test1.md
 
 4. Enjoy evermd! 
 ![note](./img/note.png)
+
 ## defects
 There are some inevitable defects in evermd. you can read the code and propose some issues. I appreciate it when pull requests received.
 ## license
