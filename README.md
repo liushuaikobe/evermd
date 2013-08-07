@@ -40,7 +40,7 @@ Evermd doesn't need any extra installations. Yout just need to excute the specif
 1. Edit your note wrriten on markdown with any editor you like, [Mou](http://mouapp.com/) is a good choice in OS X.
 ![edit_md](./img/edit_md.png)
 2. Save your note as a markdown file. I save it in `~/temp/test1.md`.
-3. Excute the scripts 
+3. Excute the scripts. 
 
 ```
 $ cd evermd
@@ -48,12 +48,25 @@ $ cd evermd
 $ python create.py ~/temp/test1.md 
 # you will be prompted for your evernote login and pwd
 ```
+The entire process may be:
 ![sample_use](./img/sample_use.png)
 
-4. Enjoy evermd! 
+4. Enjoy evermd ! 
 ![note](./img/note.png)
 
 ## defects
-There are some inevitable defects in evermd. you can read the code and propose some issues. I appreciate it when pull requests received.
+There are some inevitable defects in evermd. you can read the code and propose some issues. I appreciate it when pull requests received.    
+Some known defects:
+
+- we can just create a note but we can't modify it or even sync it
+- markdown -> html -> [ENML](http://dev.evernote.com/start/core/enml.php), in which `html -> ENML` process need to be improved
+- The way we get the default note name need to be handled more robust
+
+## Thanks to
+- [geeknote](https://github.com/VitaliyRodnenko/geeknote)
+- [python-oauth2](https://github.com/simplegeo/python-oauth2)
+
+
+
 ## license
 GNU GENERAL PUBLIC LICENSE
