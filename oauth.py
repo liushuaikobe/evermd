@@ -19,7 +19,7 @@ class EvermdAuth(object):
 	consumerSecret = config.consumer_secret
 
 	url = {
-		"base"  : config.evernote_host,
+		"base"  : None,
 		"oauth" : "/OAuth.action?oauth_token=%s",
 		"access": "/OAuth.action",
 		"token" : "/oauth",
@@ -122,6 +122,12 @@ class EvermdAuth(object):
 		return dict(item.split('=', 1) for item in data.split('?')[-1].split('&'))
 
 	def auth(self):
+		choice = raw_input('Are you Evernote International?[Y/n]')
+		choice = False if choice.lower() == 'n' else True
+
+		self.url['base'] = config.get_evernote_host(choice)
+		# print self.url['base']
+
 		print 'Authorize...'
 		self.getTmpOAuthToken()
 		self.login()
