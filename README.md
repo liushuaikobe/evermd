@@ -53,7 +53,7 @@ The entire process may be:
 4. Enjoy evermd ! 
 ![note](./img/note.png)
 
-## defects
+## Defects
 There are some inevitable defects in evermd. you can read the code and propose some issues. I appreciate it when pull requests received.    
 Some known defects:
 
@@ -67,5 +67,5 @@ Some known defects:
 
 
 
-## license
+## LICENSE
 GNU GENERAL PUBLIC LICENSE
